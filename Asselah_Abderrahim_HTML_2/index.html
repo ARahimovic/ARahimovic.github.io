@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Job Application WebPage</title>
+      
+      <style>
+       * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        html, body {
+          width: 100%;
+          min-height: 100vh;
+          margin: 0;
+          padding: 0;
+        }
+       #mainContainer {
+          width: 70%; /* 70% of the viewport width */
+          margin-left: auto;
+          margin-right: auto;
+          min-height: 100vh;
+          max-width: 1440px;
+          background: #ffffff;
+        }
+        header,footer{
+          padding: 20px 20px;
+          background-color: #F0F0F0;
+          border: 1px solid #E0E0E0;
+        }
+        footer {
+          display: flex;
+          gap: 30px;
+        }
+        article
+        {
+          padding: 20px 20px;
+          margin-top: 20px; 
+          background-color: #F9F9F9;
+          border: 1px solid #E0E0E0;
+        }
+        .addMargin{margin-bottom: 10px;}
+
+        blockquote {
+          border-left: 4px solid #530202;
+          padding-left: 16px;
+          margin: 16px 0;
+          font-style: italic;
+        }
+
+      </style> 
+  </head>
+
+  <body>
+    <div id="mainContainer">
+      <header aria-label="Main header">
+          <h1> Laurea University of Applied Science </h1>
+          <nav>
+            <ul style="margin: 20px 10px; display:flex; gap: 30px;">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="https://laureauas.sharepoint.com/sites/Laureaintranethome" target="_blank">Laurea Intranet</a>
+              <li><a href="https://www.laurea.fi/en/laurea/" target="_blank">About</a></li>
+              <li><a href="https://www.laurea.fi/en/contact-information/" target="_blank">Contact</a></li>
+            </ul>
+          </nav>
+      </header>
+      <main aria-label="Main Form">
+        <!-- Main Article containing the form-->
+        <article>
+          <h2>Student Assistant Job Application</h2>
+            <form action="./submit.html" method="POST">
+              <!-- Section : personal info -->
+              <section id="personalInfo">
+                <br>
+                <!--first name-->
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" name="firstname" minlength="3" maxlength="50" pattern="[A-Za-zÀ-ÿ]+" placeholder="Enter first name" required>
+                <br><br>
+                <!--last name-->
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" name="lastname" minlength="3" maxlength="50" pattern="[A-Za-zÀ-ÿ]+" placeholder="Enter last name" required>
+                <br><br>
+                <!--date of birth-->
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+                <br><br>
+                <!-- Gender -->
+                <p class="addMargin">Gender</p>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+                <br><br>
+                <!--email adress-->
+                <label for="emailadress">Email adress</label>
+                <input type="email" id="emailadress" name="emailadress" placeholder="Enter email adress" autocomplete="email" required>
+                <br><br>
+                <!--Password-->
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" minlength="8" maxlength="64" autocomplete="new-password" required>
+                <br><br>
+              </section>
+              <!-- Section : jobInfo -->
+              <section id="jobInfo">
+                <!--years of experience-->
+                <label for="experience">Years of experience</label>
+                <input type="number" id="experience" name="experience" min="0" max="50" step="1" required>
+                <br><br>
+                <!--Salary Excepctation-->
+                <label for="salary">Salary excepctation</label>
+                <input type="range" id="salary" name="salary" min="30" max="100" step="1" required>
+                <br><br>
+                <!--Job Preferences-->
+                <p>Job Preferences</p><br>
+                <input type="checkbox" id="remote" name="jobPreference" value="remote">
+                <label for="remote">Remote</label>
+                <input type="checkbox" id="onCampus" name="jobPreference" value="onCampus">
+                <label for="onCampus">On Campus</label>
+                <input type="checkbox" id="partTime" name="jobPreference" value="partTime">
+                <label for="partTime">Part-Time</label>
+                <br><br>
+                <!-- Job Type-->
+                <p class="addMargin">Job Type</p>
+                <input type="radio" name="jobType" id="internship" value="internship">
+                <label for="internship">Internship</label>
+                <input type="radio" name="jobType" id="assistant" value="assistant">
+                <label for="assistant">Student Assistant</label>
+                <br><br>
+                <!-- Departement-->
+                <label for="department">Choose a department:</label>
+                <select id="department" name="department">
+                  <option value="">--Select Department--</option>
+                  <option value="business-management">Business Management</option>
+                  <option value="business-it">Business Information Technology</option>
+                  <option value="security-safety">Security, Safety & Risk Management</option>
+                  <option value="hospitality-service">Hospitality Management & Service Design</option>
+                  <option value="social-services">Social Services</option>
+                  <option value="healthcare-nursing">Health Care / Nursing</option>
+                  <option value="physiotherapy">Physiotherapy / Rehabilitation</option>
+                  <option value="beauty-cosmetics">Beauty & Cosmetics</option>
+                  <option value="correctional-services">Correctional Services (Criminal Justice / Probation)</option>
+                  <option value="technology-law">Technology Law (Master’s)</option>
+                  <option value="service-innovation">Service Innovation & Design (Master’s)</option>
+                  <option value="global-health">Global Health & Crisis Management (Master’s)</option>
+                  <option value="transformational-change">Leading Transformational Change (Master’s)</option>
+                </select>
+                <br><br>
+                <!-- Campuses -->
+                <label for="campus">Choose a campus:</label>
+                <input type="text" list="campuses" id="campus" name="campus">
+                <datalist id="campuses">
+                  <option value="Otaniemi">Otaniemi</option>
+                  <option value="Leppävaara">Leppävaara</option>
+                  <option value="Tikkurila">Tikkurila</option>
+                  <option value="Hyvinkää">Hyvinkää</option>
+                  <option value="Lohja">Lohja</option>
+                  <option value="Porvoo">Porvoo</option>
+                </datalist>
+                <br><br>
+              </section>
+              <!-- Section : extraInfo -->
+              <section id="extraInfo">
+                <!-- Motivation Letter -->
+                <label for="motivationLetter">Motivation Letter :</label><br>
+                <textarea id="motivationLetter" name="motivationLetter" placeholder="Write your motivationLetter here.." rows="10" cols="30" minlength="10" maxlength="1000" required></textarea>
+                <br><br>
+                <!-- Refereal code-->
+                <label for="referealCode">Referral Code (Disabled): </label>
+                <input type="text" value="LAUREAREF66" disabled>
+                <br><br>
+                <!--Application ID-->
+                <label for="referealCode">Application Code (readOnly): </label>
+                <input type="text" value="LAU2025APP" readonly>
+                <br><br>
+              </section>
+              <!-- Submit button-->
+              <input type="submit" value="Send Application" style="padding: 10px;">
+            </form>
+          </article>
+    
+          <aside aria-label="Inspirational Quote" style="padding: 10px 20px;">
+            <blockquote cite="https://www.goodreads.com/quotes/833-the-beautiful-thing-about-learning-is-nobody-can-take-it">
+              " The beautiful thing about learning is that no one can take it away from you "
+                — B.B. King
+            </blockquote>
+          </aside>
+      </main>
+
+      <footer>
+         <img src="laurea_logo.png" alt="Laurea University Logo" style="height:100px; vertical-align:middle; margin-bottom:8px;">
+        <p>
+          Vanha maantie 9, 02650 Espoo, Finland<br><br>
+          Tel: +358 9 8868 7000 | Email: <a href="mailto:info@laurea.fi">info@laurea.fi</a><br><br>
+          &copy; 2025 Laurea University of Applied Sciences. All rights reserved.
+        </p>
+      </footer>
+    </div>
+  </body>
+
+</html>
+
+
+
