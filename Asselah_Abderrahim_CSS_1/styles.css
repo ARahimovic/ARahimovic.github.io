@@ -1,0 +1,116 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Global Styles */
+html {
+    font-family: Arial, sans-serif;
+    background-color: #FAFAFA;
+    width: 100vw;
+}
+
+body {
+    /* Center the content and set max width */
+    width: 90%;
+    min-height: 100vh;
+    max-width: 1440px;
+    margin: 0 auto;
+    font-size: 20px;
+}
+header nav ul {
+    /* Flexbox for horizontal menu */
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header
+{
+ background-color:#F0F0F0;
+ border: 1px solid #E0E0E0;
+}
+/* Header and Footer Styles */
+header,footer{
+    margin: 20px;
+    padding: 20px 20px;
+    text-align: center;
+}
+
+footer div{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+/* To have a distinct style for the footer copyright text */
+#footerCopyRight{
+    font-size: 14px;
+    color: #666666;
+    margin-top: 30px;
+    background-color:#F0F0F0;
+    padding: 30px;
+    border: 1px solid #E0E0E0;
+}
+
+input[type="submit"] {
+    background-color: #183b6b;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 32px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(24, 59, 107, 0.15);
+}
+
+input[type="submit"]:hover {
+    background-color: #275ea3;
+}
+
+h1
+{
+    text-align: center;
+    margin-bottom: 20px;
+    color: darkblue;
+}
+
+#mainContainer {
+    width: 80%; /* 80% of the viewport width */
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100vh;
+    max-width: 1440px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+}
+
+article
+{
+    width: 100%;
+    padding: 20px 20px;
+    margin: 20px; 
+    background-color: #F9F9F9;
+    border: 1px solid #E0E0E0;
+}
+
+article h2
+{
+    margin-bottom: 15px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.addMargin{margin-bottom: 10px;}
+
+blockquote {
+    border-left: 4px solid #530202;
+    padding-left: 16px;
+    margin: 16px 0;
+    font-style: italic;
+}
