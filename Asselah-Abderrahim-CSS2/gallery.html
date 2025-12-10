@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Art Gallery</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>ART GALLERY</h1>
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="gallery.html">Gallery</a>
+        </nav>
+    </header>
+
+    <main class="gallery">
+        <h2>Cities and landscapes</h2>
+
+        <figure class="position-relative">
+            <img src="img/florence.jpg" alt="City 1" class="art-image" />
+            <figcaption>City 1 (relative positioning)</figcaption>
+        </figure>
+
+        <figure class="position-absolute">
+            <img src="img/naples.jpg" alt="City 2" class="art-image" />
+            <figcaption>City 2 (absolute positioning)</figcaption>
+        </figure>
+
+        <figure class="position-sticky">
+            <img src="img/newYork.jpg" alt="City 3" class="art-image" />
+            <figcaption>City 3 (sticky positioning)</figcaption>
+        </figure>
+
+        <figure class="position-static">
+            <img src="img/newYork2.jpg" alt="City 4" class="art-image" />
+            <figcaption>City 4 (static positioning)</figcaption>
+        </figure>
+
+        <!-- City 5 (iframe box) -->
+        <figure class="iframe-box">
+            <iframe src="img/portofino.jpg" title="City 5 image" class="iframe-img">
+            </iframe>
+            <figcaption>City 5 (iframe box)</figcaption>
+        </figure>
+
+
+
+        <section class="z-stack-inline">
+            <figure class="zbox z-n1">
+                <img src="img/florence.jpg" alt="City 1" />
+                <figcaption>City 1 (z:-1)</figcaption>
+            </figure>
+
+            <figure class="zbox z-0">
+                <img src="img/naples.jpg" alt="City 2" />
+                <figcaption>City 2 (z:0)</figcaption>
+            </figure>
+
+            <figure class="zbox z1">
+                <img src="img/newYork.jpg" alt="City 3" />
+                <figcaption>City 3 (z:1)</figcaption>
+            </figure>
+
+            <figure class="zbox z2">
+                <img src="img/tokyo.jpg" alt="City 4" />
+                <figcaption>City 4 (z:2)</figcaption>
+            </figure>
+
+            <figure class="zbox z3">
+                <img src="img/venice.jpg" alt="City 5" />
+                <figcaption>City 5 (z:3)</figcaption>
+            </figure>
+        </section>
+
+
+
+    </main>
+
+
+    <footer id="galleryFooter" class="fixedFooter">
+        <p>© ArtGallery - Exploring the Beauty of Cities.</p>
+    </footer>
+
+</body>
+
+
+</html>

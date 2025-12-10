@@ -1,0 +1,244 @@
+/* Reset + base styling */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, "Times New Roman", serif;
+    text-align: center;
+    background-color: #ffffff;
+    color: #000;
+}
+
+/* Header */
+header {
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+    letter-spacing: 4px;
+    word-spacing: 0.2em;
+    line-height: 1.2;
+}
+
+/* Navigation */
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    margin: 0 10px;
+    color: blue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: #a52a2a;
+}
+
+/* Main content */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* Special text styles */
+.highlight {
+    color: #0066aa;
+    font-weight: bold;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.credits {
+    margin-top: 20px;
+}
+
+.education {
+    margin-bottom: 30px;
+}
+
+/* Quote box */
+blockquote {
+    background-color: hsl(211, 56%, 91%);
+    padding: 15px 20px;
+    border-radius: 8px;
+    width: fit-content;
+    margin: 30px auto;
+    font-style: italic;
+}
+
+.gallery {
+    display: block;
+    text-align: center;
+}
+
+.art-image {
+    width: 300px;
+    height: auto;
+    margin: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.gallery figcaption {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 30px;
+    font-style: italic;
+    text-align: center;
+}
+
+
+/* positioning classes */
+
+.position-static {
+    position: static;
+}
+
+.position-relative {
+    position: relative;
+    top: 10px;
+    left: 200px;
+}
+
+.position-absolute {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    /* 50px from top and 20px from right of positioned ancestor */
+}
+
+.position-sticky {
+    position: sticky;
+    top: 10px;
+    z-index: 1;
+}
+
+.iframe-box {
+    display: block;
+    border-radius: 5px;
+    width: 420px;
+    height: 280px;
+    margin: 20px auto;
+
+}
+
+.iframe-img {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #333;
+    position: relative;
+    object-fit: cover;
+}
+
+
+
+.z-stack-inline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+}
+
+.zbox {
+    display: inline-block;
+    margin-left: -100px;
+    position: relative;
+    text-align: center;
+}
+
+.zbox:first-child {
+    margin-left: 0;
+}
+
+.z-n1 {
+    /* had to change this from -1 to 1 because hover was not working properly */
+    z-index: 1;
+}
+
+.z-0 {
+    z-index: 2;
+}
+
+.z1 {
+    z-index: 3;
+}
+
+.z2 {
+    z-index: 4;
+}
+
+.z3 {
+    z-index: 5;
+}
+
+.zbox img {
+    width: 200px;
+    height: 300px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    display: block;
+    margin-top: 125px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.zbox img:hover {
+    transform: scale(1.05);
+    /* Slightly enlarge on hover */
+}
+
+.zbox figcaption {
+    margin-top: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: center;
+}
+
+
+/* home page footer */
+#homeFooter {
+    background-color: #f0f0f0;
+    padding: 15px 0;
+    border-top: 1px solid #ccc;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+/* gallery page footer */
+#galleryFooter {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+/* Fixed footer style class, applied for both footers */
+.fixedFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
