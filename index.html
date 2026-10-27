@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abderrahim Asselah · Embedded Software Engineer</title>
+  <meta name="description"
+    content="Embedded software engineer building deterministic C/C++ firmware, Zephyr applications and Yocto Linux systems for ARM-based RF products. Based in Oulu, Finland.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #fff;
+      --line: #d3deec;
+      --text: #0f1b2d;
+      --muted: #4d6280;
+      --signal: #1767b3;
+      --clip: #b45309;
+      --on-clip: #fff;
+      --head: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+      --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 72px
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 1.0625rem/1.65 var(--body)
+    }
+
+    a {
+      color: inherit
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--clip);
+      outline-offset: 3px;
+      border-radius: 4px
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--head);
+      line-height: 1.15;
+      margin: 0
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+      margin-bottom: 28px
+    }
+
+    h3 {
+      font-size: 1.25rem
+    }
+
+    section {
+      padding: 80px 0;
+      border-top: 1px solid var(--line)
+    }
+
+    p {
+      margin: 0 0 1em;
+      max-width: 68ch
+    }
+
+    .about {
+      width: 100%
+    }
+
+    .about p {
+      max-width: none
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line)
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px
+    }
+
+    .brand {
+      font: 700 1.1rem var(--head);
+      text-decoration: none
+    }
+
+    nav ul {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0
+    }
+
+    nav ul a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .95rem;
+      font-weight: 500
+    }
+
+    nav ul a:hover {
+      color: var(--text)
+    }
+
+    @media(max-width:700px) {
+      nav ul {
+        gap: 14px
+      }
+
+      nav ul li:nth-child(n+4) {
+        display: none
+      }
+    }
+
+    .hero {
+      padding: 72px 0 40px;
+      border: 0
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 56px;
+      align-items: center
+    }
+
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface)
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+      letter-spacing: -.02em;
+      max-width: 15ch
+    }
+
+    .role {
+      font-size: 1.2rem;
+      color: var(--signal);
+      font-weight: 500;
+      margin: 18px 0 8px
+    }
+
+    .hero p.lede {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 56ch
+    }
+
+    @media(max-width:800px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 32px
+      }
+
+      .hero-photo {
+        width: min(260px, 100%);
+        aspect-ratio: 1 / 1;
+        object-position: center 28%
+      }
+    }
+
+    .avail {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      font-size: .92rem;
+      color: var(--muted);
+      margin-bottom: 22px
+    }
+
+    .avail i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #3ddc97;
+      display: block
+    }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .97rem;
+      transition: border-color .15s, background .15s
+    }
+
+    .btn:hover {
+      border-color: var(--signal)
+    }
+
+    .btn.primary {
+      background: var(--clip);
+      color: var(--on-clip);
+      border-color: var(--clip)
+    }
+
+    .btn.primary:hover {
+      filter: brightness(1.08)
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px 24px
+    }
+
+    @media(max-width:700px) {
+      .skills {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .skills h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin: 0 0 12px
+    }
+
+    .skills > div {
+      min-height: 112px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: 0 8px 20px rgba(15, 27, 45, .05)
+    }
+
+    .skills h3::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      flex: 0 0 4px;
+      border-radius: 2px;
+      background: var(--signal)
+    }
+
+    .skills > div:nth-child(2) h3::before {
+      background: #0e7490
+    }
+
+    .skills > div:nth-child(3) h3::before {
+      background: #c2410c
+    }
+
+    .skills > div:nth-child(4) h3::before {
+      background: #7c3aed
+    }
+
+    .skills > div:nth-child(5) h3::before {
+      background: #15803d
+    }
+
+    .skill-badges {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .skills > div:last-child {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 108px
+    }
+
+    .skills > div:last-child h3 {
+      align-self: center
+    }
+
+    .skill-badges img {
+      display: block;
+      height: 24px;
+      width: auto
+    }
+
+    .tl {
+      position: relative;
+      margin: 0;
+      padding: 0 0 0 28px;
+      list-style: none;
+      border-left: 2px solid var(--line)
+    }
+
+    .tl>li {
+      position: relative;
+      padding-bottom: 44px
+    }
+
+    .tl>li:last-child {
+      padding-bottom: 0
+    }
+
+    .tl>li::before {
+      content: "";
+      position: absolute;
+      left: -37px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--clip)
+    }
+
+    .when {
+      color: var(--clip);
+      font-weight: 600;
+      font-size: .93rem
+    }
+
+    .org {
+      color: var(--muted);
+      margin: 2px 0 14px
+    }
+
+    .tl ul.pts {
+      padding-left: 1.1em;
+      margin: 0 0 16px;
+      max-width: 72ch
+    }
+
+    .tl ul.pts li {
+      margin-bottom: 8px
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      list-style: none;
+      padding: 0;
+      margin: 0
+    }
+
+    .tags li {
+      font-size: .82rem;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 9px
+    }
+
+    .proj {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 28px
+    }
+
+    .proj h3 {
+      font-size: 1.5rem;
+      margin-bottom: 6px
+    }
+
+    .proj .sub {
+      color: var(--signal);
+      font-weight: 500;
+      margin-bottom: 20px
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 36px
+    }
+
+    @media(max-width:800px) {
+      .cols {
+        grid-template-columns: 1fr
+      }
+
+      .proj {
+        padding: 22px
+      }
+    }
+
+    .proj h4 {
+      margin: 0 0 4px;
+      font-size: 1rem
+    }
+
+    .flowwrap {
+      overflow-x: auto;
+      margin: 10px 0 6px;
+      padding-bottom: 8px
+    }
+
+    .flow {
+      display: flex;
+      align-items: stretch;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      min-width: max-content
+    }
+
+    .flow li {
+      position: relative;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 13px;
+      font-size: .86rem;
+      margin-right: 26px;
+      text-align: center;
+      display: flex;
+      align-items: center
+    }
+
+    .flow li:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: -19px;
+      top: 50%;
+      width: 12px;
+      height: 2px;
+      background: var(--signal)
+    }
+
+    .flow li:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: calc(50% - 4px);
+      border: 5px solid transparent;
+      border-left: 7px solid var(--signal);
+      border-right: 0
+    }
+
+    .flow li.hl {
+      border-color: var(--clip);
+      color: var(--clip);
+      font-weight: 600
+    }
+
+    .flowlabel {
+      font-size: .9rem;
+      color: var(--muted);
+      margin: 18px 0 0
+    }
+
+    .edu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px
+    }
+
+    .edu div {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 20px 22px
+    }
+
+    .edu p {
+      margin: 2px 0
+    }
+
+    .contact .big {
+      font: 700 clamp(2rem, 4vw, 2.8rem) var(--head);
+      line-height: 1.1;
+      margin: 32px 0 16px;
+      max-width: 22ch
+    }
+
+    .contact h2 {
+      color: var(--signal);
+      font-size: .95rem;
+      letter-spacing: .12em;
+      margin-bottom: 0;
+      text-transform: uppercase
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 24px;
+      margin-top: 28px
+    }
+
+    .toptal-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      min-width: 220px;
+      padding: 20px 24px;
+      border: 1px solid #25a9ef;
+      border-radius: 14px;
+      background: linear-gradient(153deg, #0667ff 18%, #204ecf 40%, #0f256e 80%);
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 18px 32px rgba(6, 30, 96, .22);
+      transition: transform .15s, box-shadow .15s
+    }
+
+    .toptal-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 38px rgba(6, 30, 96, .3)
+    }
+
+    .toptal-badge .stars {
+      color: #fff;
+      font-size: 1.25rem;
+      letter-spacing: 3px;
+      line-height: 1
+    }
+
+    .toptal-badge strong {
+      font-size: .95rem;
+      letter-spacing: .04em
+    }
+
+    .toptal-badge span {
+      font-size: .82rem;
+      opacity: .8
+    }
+
+    @media(max-width:600px) {
+      .contact-links {
+        align-items: stretch;
+        flex-direction: column
+      }
+
+      .toptal-badge {
+        align-self: flex-start
+      }
+
+      .contact-links .btn {
+        align-self: flex-start
+      }
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 26px 0;
+      color: var(--muted);
+      font-size: .9rem
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    @media print {
+
+      header,
+      .btns {
+        display: none
+      }
+
+      section {
+        padding: 28px 0
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="wrap" aria-label="Main">
+      <a class="brand" href="#top">Abderrahim Asselah</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="avail"><i></i> Open to embedded software opportunities · Oulu / remote</div>
+        <div class="hero-layout">
+          <div>
+            <h1>Reliable software for real-time systems.</h1>
+            <p class="role">Embedded Software Engineer | C/C++ | Zephyr RTOS | Embedded Linux | CI/CD</p>
+            <p class="lede">I build high-performance, deterministic software for ARM-based systems, from real-time
+              firmware
+              and Yocto Linux images to the automated tests and CI/CD pipelines that make releases dependable.</p>
+            <div class="btns">
+              <a class="btn primary" href="#contact">Get in touch</a>
+              <a class="btn" href="#experience">View experience</a>
+            </div>
+          </div>
+          <img class="hero-photo" src="IMG_0495_1.jpeg" alt="Abderrahim Asselah, embedded software engineer">
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="about">
+          <h2>About</h2>
+          <p>I’m an embedded software engineer specializing in high-performance, real-time applications for ARM-based RF
+            systems. I work across firmware and embedded Linux, using C/C++, Zephyr RTOS and Yocto to turn complex
+            hardware requirements into dependable products.</p>
+          <p>I use test-driven development, unit testing and Robot Framework automation to keep behavior deterministic
+            and maintainable. I also build Jenkins CI/CD pipelines with SonarQube quality gates, so regressions are
+            caught before they reach hardware or production.</p>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <h2>Skills</h2>
+        <div class="skills">
+          <div>
+            <h3>Languages</h3>
+            <div class="skill-badges">
+              <img src="https://img.shields.io/badge/C-00599C?style=flat-square&amp;logo=c&amp;logoColor=white" alt="C">
+              <img
+                src="https://img.shields.io/badge/C%2B%2B-00599C?style=flat-square&amp;logo=cplusplus&amp;logoColor=white"
+                alt="C++">
+              <img
+                src="https://img.shields.io/badge/Python-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white"
+                alt="Python">
+              <img
+                src="https://img.shields.io/badge/Bash-121011?style=flat-square&amp;logo=gnu-bash&amp;logoColor=white"
+                alt="Bash">
+            </div>
+          </div>
+          <div>
+            <h3>Real-Time Systems &amp; Embedded Linux</h3>
+            <div class="skill-badges">
+              <img
+                src="https://img.shields.io/badge/Zephyr_RTOS-002244?style=flat-square&amp;logo=zephyrproject&amp;logoColor=white"
+                alt="Zephyr RTOS">
+              <img
+                src="https://img.shields.io/badge/FreeRTOS-6CACE4?style=flat-square&amp;logo=freertos&amp;logoColor=white"
+                alt="FreeRTOS">
+              <img
+                src="https://img.shields.io/badge/Yocto_Project-1A2B4C?style=flat-square&amp;logo=yocto&amp;logoColor=white"
+                alt="Yocto Project">
+            </div>
+          </div>
+          <div>
+            <h3>Hardware &amp; Architectures</h3>
+            <div class="skill-badges">
+              <img
+                src="https://img.shields.io/badge/ARM_Cortex-0091BD?style=flat-square&amp;logo=arm&amp;logoColor=white"
+                alt="ARM Cortex">
+              <img
+                src="https://img.shields.io/badge/Nordic_Semiconductor-00A9CE?style=flat-square&amp;logo=nordicsemiconductor&amp;logoColor=white"
+                alt="Nordic Semiconductor">
+              <img
+                src="https://img.shields.io/badge/STM32-03234B?style=flat-square&amp;logo=stmicroelectronics&amp;logoColor=white"
+                alt="STM32">
+              <img
+                src="https://img.shields.io/badge/ESP32-E7352C?style=flat-square&amp;logo=espressif&amp;logoColor=white"
+                alt="ESP32">
+            </div>
+          </div>
+          <div>
+            <h3>Testing &amp; Code Quality</h3>
+            <div class="skill-badges">
+              <img
+                src="https://img.shields.io/badge/Robot_Framework-000000?style=flat-square&amp;logo=robotframework&amp;logoColor=white"
+                alt="Robot Framework">
+              <img
+                src="https://img.shields.io/badge/SonarQube-4E9BCD?style=flat-square&amp;logo=sonarqube&amp;logoColor=white"
+                alt="SonarQube">
+            </div>
+          </div>
+          <div>
+            <h3>CI/CD &amp; DevOps</h3>
+            <div class="skill-badges">
+              <img
+                src="https://img.shields.io/badge/Jenkins-D24939?style=flat-square&amp;logo=jenkins&amp;logoColor=white"
+                alt="Jenkins">
+              <img
+                src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&amp;logo=docker&amp;logoColor=white"
+                alt="Docker">
+              <img src="https://img.shields.io/badge/CMake-064F8C?style=flat-square&amp;logo=cmake&amp;logoColor=white"
+                alt="CMake">
+              <img
+                src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&amp;logo=githubactions&amp;logoColor=white"
+                alt="GitHub Actions">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <h2>Experience</h2>
+        <ol class="tl">
+          <li>
+            <div class="when">2021 – present</div>
+            <h3>Embedded Software Engineer</h3>
+            <div class="org">Nokia</div>
+            <ul class="pts">
+              <li>Developed real-time firmware and software APIs for ARM-based RF SoCs used in 5G radio systems, across
+                the full stack from Zephyr applications to Yocto-based embedded Linux images.</li>
+              <li>Owned a dynamic crest factor reduction feature end to end: an interrupt-driven, multithreaded Zephyr
+                application running across multiple cores, plus its unit tests, hardware-in-the-loop system tests and
+                CI.</li>
+              <li>Drove code reliability with strict TDD, using GTest, GMock and FFF, and automated hardware-in-the-loop
+                system tests with Robot Framework.</li>
+              <li>Built Jenkins CI/CD pipelines: per-commit build, tests, coverage and SonarQube analysis, plus nightly
+                Yocto image builds validated on hardware, with Teams alerts on failures.</li>
+              <li>Created and maintained Yocto recipes, including the Zephyr firmware recipe that packages the firmware
+                into the Linux image.</li>
+            </ul>
+            <ul class="tags">
+              <li>C++</li>
+              <li>Zephyr</li>
+              <li>Yocto</li>
+              <li>Python</li>
+              <li>Robot Framework</li>
+              <li>Jenkins</li>
+              <li>CMake</li>
+              <li>Docker</li>
+              <li>ARM</li>
+            </ul>
+          </li>
+          <li>
+            <div class="when">2021</div>
+            <h3>Embedded Software Intern</h3>
+            <div class="org">Laboratoire de Physique Subatomiques et de Cosmologie</div>
+            <ul class="pts">
+              <li>Developed a bare-metal embedded HMI for controlling a magnetic generator on a PIC18F46K22
+                microcontroller.</li>
+              <li>Implemented UART, SPI and I2C communication with a PC, an FPGA and a display.</li>
+              <li>Designed a state-machine-based menu system for configuration and control, and a UART-based CLI.</li>
+            </ul>
+            <ul class="tags">
+              <li>Embedded C</li>
+              <li>PIC18</li>
+              <li>FreeRTOS</li>
+              <li>UART / SPI / I2C</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <h2>Featured projects</h2>
+
+        <article class="proj">
+          <h3>Dynamic crest factor reduction for a 5G RF SoC</h3>
+          <div class="sub">Zephyr · multicore · interrupt-driven</div>
+          <div class="cols">
+            <div>
+              <h4>The problem</h4>
+              <p>OFDM modulation produces signals with a high peak-to-average power ratio. To stay linear at those rare
+                peaks, the power amplifier must run far below its maximum output, where it is inefficient. Hard-clipping
+                the peaks saves power but adds distortion.</p>
+            </div>
+            <div>
+              <h4>The approach</h4>
+              <p>Different parts of the signal tolerate different distortion. I implemented a dynamic clipping firmware
+                that
+                reads the EVM targets for each part of the signal and sets the hardware clipper in real time. Robust
+                parts are clipped heavily and high-rate parts stay clean, so power drops while signal quality holds.</p>
+            </div>
+          </div>
+          <p class="flowlabel">Firmware architecture</p>
+          <div class="flowwrap">
+            <ol class="flow">
+              <li>Hardware interrupt</li>
+              <li>ISR passes offset via Zephyr pipe</li>
+              <li>Main thread parses buffer</li>
+              <li>EVM target queue</li>
+              <li class="hl">4 worker threads, one per core</li>
+              <li>Clipper hardware registers</li>
+            </ol>
+          </div>
+          <p class="muted">The ISR stays minimal. The main thread sleeps until an interrupt arrives, and the workers
+            compute clipper weights in parallel.</p>
+        </article>
+
+        <article class="proj">
+          <h3>Test automation and CI for Zephyr and embedded Linux</h3>
+          <div class="sub">Robot Framework · Jenkins · Yocto · SonarQube</div>
+          <div class="cols">
+            <div>
+              <h4>The challenge</h4>
+              <p>Validating firmware that runs on remote cores next to embedded Linux is hard, especially before silicon
+                exists. Defects found late in integration are expensive, so I built automated tests and CI to catch
+                regressions early.</p>
+            </div>
+            <div>
+              <h4>The result</h4>
+              <p>Unit tests and Robot Framework component tests cover the clipper’s core functionality. They ran first
+                on a pre-silicon emulator, then moved to real hardware. Nothing merges without passing the quality
+                gates, including at least 80% coverage.</p>
+            </div>
+          </div>
+          <p class="flowlabel">Merge gate, on every push</p>
+          <div class="flowwrap">
+            <ol class="flow">
+              <li>Push</li>
+              <li>Build</li>
+              <li>Unit tests</li>
+              <li>Coverage ≥ 80%</li>
+              <li class="hl">SonarQube gate</li>
+              <li>Merge</li>
+            </ol>
+          </div>
+          <p class="flowlabel">Nightly pipeline</p>
+          <div class="flowwrap">
+            <ol class="flow">
+              <li>Full Yocto image with Zephyr recipe</li>
+              <li>Reserve emulator or board</li>
+              <li>Boot Linux</li>
+              <li class="hl">Load Zephyr on remote core via remoteproc</li>
+              <li>Run Robot Framework tests</li>
+              <li>Archive results</li>
+              <li>Teams alert on failure</li>
+            </ol>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="wrap">
+        <h2>Education</h2>
+        <div class="edu">
+          <div>
+            <h3>Master’s degree in Embedded Systems</h3>
+            <p>University of Grenoble, Grenoble, France</p>
+            <p class="muted">2019 – 2021</p>
+          </div>
+          <div>
+            <h3>Bachelor’s degree in Electrical Engineering</h3>
+            <p>University of Grenoble, Grenoble, France</p>
+            <p class="muted">2019 – 2020</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <h2>Contact</h2>
+        <div class="big">Looking for an embedded software engineer?</div>
+        <p class="muted">I’m open to embedded software opportunities and selected contract engagements. For enquiries
+          about my experience, technical expertise, or potential collaboration, please get in touch.</p>
+        <div class="contact-links">
+          <a class="toptal-badge" href="https://www.toptal.com/developers/resume/abderrahim-asselah#O70woy"
+            target="_blank" rel="noopener noreferrer" aria-label="View my Toptal profile, top 3% talent">
+            <span class="stars" aria-hidden="true">★ ★ ★</span>
+            <strong>TOP 3% TALENT</strong>
+            <span>Vetted by Toptal · View profile</span>
+          </a>
+          <a class="btn primary" href="https://www.linkedin.com/in/abderrahim-asselah-82b232188" target="_blank"
+            rel="noopener noreferrer">Connect on LinkedIn</a>
+          <a class="btn" href="https://github.com/ARahimovic" target="_blank" rel="noopener noreferrer">View GitHub
+            profile</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap"><span>© <span id="yr">2026</span> Abderrahim Asselah</span><span>Oulu, Finland</span></div>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>
